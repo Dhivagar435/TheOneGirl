@@ -124,6 +124,12 @@ const reduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
 const sky = $('sky'), small = innerWidth < 600;
 const list = small ? PHOTOS.filter((_, i) => i % 3 !== 2) : PHOTOS;   // fewer photos on phones
 const n = list.length;
+
+const DUR = small ? 26 : 32;                       // same speed for all
+const gcd = (a, b) => b ? gcd(b, a % b) : a;
+let step = Math.max(2, Math.round(n * .4));        // neighbours in different heights
+while (gcd(step, n) !== 1) step++;
+
 list.forEach(([f, cap], i) => {
   const p = document.createElement('div');
   p.className = 'pl';
@@ -131,13 +137,13 @@ list.forEach(([f, cap], i) => {
   const w = small ? 62 + Math.random() * 16 : 120 + Math.random() * 40;   // phone: 62-78px
   const lane = (innerWidth - w - 8) / n;                                   // each photo gets its own lane, no cut-off
   const s = p.style;
-  s.setProperty('--x', (4 + i * lane + Math.random() * lane * .4) + 'px');
+  s.setProperty('--x', (4 + i * lane + Math.random() * lane * .15) + 'px');
   s.setProperty('--st', (Math.random() * 70) + 'vh');
   p.innerHTML = '<div class="in"><img alt="" src="assets/' + f + '"><b>' + cap + '</b></div>';
   const inn = p.firstChild.style;
   inn.setProperty('--w', w + 'px');
-  inn.setProperty('--d', (22 + Math.random() * 14) + 's');
-  inn.setProperty('--dl', (-Math.random() * 30) + 's');
+  inn.setProperty('--d', DUR + 's');
+  inn.setProperty('--dl', (-((i * step) % n) * DUR / n) + 's');
   inn.setProperty('--dx', ((Math.random() - .5) * 60) + 'px');
   inn.setProperty('--r0', ((Math.random() - .5) * 20) + 'deg');
   inn.setProperty('--r1', ((Math.random() - .5) * 20) + 'deg');
