@@ -123,7 +123,7 @@ const reduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
 
 /* floating polaroids */
 const sky = $('sky'), small = innerWidth < 600;
-const list = small ? PHOTOS.filter((_, i) => i % 3 !== 2) : PHOTOS;   // fewer photos on phones
+const list = small ? PHOTOS.filter((p, i) => i % 3 !== 2 || p[0] === 'dad.jpeg') : PHOTOS;   // fewer photos on phones, dad always stays
 const n = list.length;
 
 const DUR = small ? 26 : 32;                       // same speed for all
