@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The One Girl 💖</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;800&family=Caveat:wght@600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ff8fb1;--hot:#e8336d;--berry:#6b1a42;--ink:#2b1020}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:'Nunito',sans-serif;color:var(--ink);line-height:1.5;display:flex;padding:max(16px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom));overflow-x:hidden;overflow-y:auto;min-height:100dvh;-webkit-text-size-adjust:100%;
+ background:radial-gradient(circle at 20% 15%,#fff3f8 0,transparent 45%),radial-gradient(circle at 85% 85%,#ffb7d1 0,transparent 50%),linear-gradient(160deg,#ffe3ee,#ffc2d9)}
+h1,button,.tile{font-family:'Baloo 2',sans-serif}
+
+/* floating polaroids */
+#sky{position:fixed;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+.pl{position:absolute;left:var(--x);bottom:-320px;transition:transform .4s ease-out}
+.in{will-change:transform;width:var(--w);background:#fff;padding:7px 7px 0;border-radius:4px;box-shadow:0 10px 24px rgba(107,26,66,.28);animation:float var(--d) linear infinite;animation-delay:var(--dl)}
+.in img{display:block;width:100%;aspect-ratio:1;object-fit:cover;border-radius:2px}
+.in b{display:block;font-family:'Caveat',cursive;font-weight:600;color:var(--berry);text-align:center;font-size:1.05rem;line-height:1.1;padding:6px 2px 8px}
+@keyframes float{
+ 0%{transform:translate(0,0) rotate(var(--r0))}
+ 50%{transform:translate(var(--dx),calc(-60vh - 160px)) rotate(var(--r1))}
+ 100%{transform:translate(0,calc(-120vh - 320px)) rotate(var(--r0))}}
+
+.card{margin:auto;position:relative;z-index:2;max-width:460px;width:100%;background:rgba(255,255,255,.9);backdrop-filter:blur(4px);border:3px solid var(--berry);border-radius:24px;padding:26px 22px;box-shadow:8px 8px 0 var(--pink);text-align:center}
+.bday{color:var(--hot);font-weight:700}
+h1{font-size:clamp(2.2rem,10vw,3.2rem);line-height:1.05;color:var(--berry);font-weight:800;margin:4px 0 10px}
+.sub{color:var(--berry)}
+.q{font-family:'Baloo 2';font-size:1.55rem;font-weight:800;color:var(--hot);margin-top:20px;line-height:1.2}
+.btns{display:flex;justify-content:center;gap:18px;margin-top:18px;min-height:70px;align-items:center}
+button{min-height:48px;font-size:1.2rem;font-weight:800;border:3px solid var(--ink);border-radius:14px;padding:10px 26px;cursor:pointer;background:#fff;color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+button.yes{background:var(--hot);color:#fff;transition:transform .15s}
+button:focus-visible{outline:3px solid var(--berry);outline-offset:3px}
+#no{z-index:5;transition:left .18s,top .18s}
+#hint{min-height:1.6em;margin-top:8px;font-size:.95rem;color:var(--berry)}
+
+/* win */
+#win{display:none}
+#win h1{margin-top:0}
+.eq{display:flex;align-items:center;justify-content:center;gap:10px;margin:14px 0 4px;font-size:1.8rem;font-weight:800;color:var(--berry)}
+.tile{width:74px;border:3px solid var(--ink);border-radius:8px;background:#fff;padding:2px 0 4px;box-shadow:3px 3px 0 var(--pink)}
+.tile i{display:block;font-style:normal;font-size:.75rem;text-align:left;padding-left:6px}
+.tile u{display:block;text-decoration:none;font-size:2.4rem;line-height:1}
+.tile s{display:block;text-decoration:none;font-size:.62rem}
+.ok{color:var(--hot);font-weight:700;margin-top:6px}
+#media{display:block;margin:12px auto 0;max-width:100%;max-height:40vh;max-height:40dvh;border-radius:14px;border:3px solid var(--pink)}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:9}
+@media(max-width:480px){
+ .card{padding:22px 16px;border-radius:20px;box-shadow:5px 5px 0 var(--pink);background:#fffffff5;-webkit-backdrop-filter:none;backdrop-filter:none}
+ .q{font-size:1.35rem;margin-top:16px}
+ .btns{gap:12px;min-height:64px}
+ button{padding:10px 22px}
+ .eq{font-size:1.4rem;gap:8px}
+ .tile{width:62px}.tile u{font-size:2rem}
+ .in{padding:5px 5px 0}
+ .in b{font-size:.78rem;line-height:1.05;padding:4px 1px 6px}
+}
+@media(prefers-reduced-motion:reduce){.pl{bottom:auto;top:var(--st)}.in{animation:none}}
+</style>
+</head>
+<body>
+
+<div id="sky" aria-hidden="true"></div>
+
+<main class="card">
+  <section id="ask">
+    <p class="bday">Happy Birthday, <span id="bn"></span> 🎂</p>
+    <h1>My One and Only</h1>
+    <p class="sub">Out of everyone in this world, my heart chose you,<br>and it will never change. 💖</p>
+
+    <div class="q"><span id="qn"></span>, will you be my forever? 💖</div>
+    <div class="btns">
+      <button class="yes" id="yes">Yes 💖</button>
+      <button id="no">No</button>
+    </div>
+    <p id="hint" role="status" aria-live="polite"></p>
+  </section>
+
+  <section id="win" aria-live="polite">
+    <h1>She said YES! 🎉</h1>
+    <div class="eq">
+      <div class="tile"><i>39</i><u>Y</u><s>Yttrium</s></div>
+      +
+      <div class="tile"><i>99</i><u>Es</u><s>Einsteinium</s></div>
+      = YES
+    </div>
+    <p class="ok">Chemistry approved ✅ Best birthday ever 💖</p>
+    <div id="mediaBox"></div>
+  </section>
+</main>
+<canvas id="c"></canvas>
+
+<script>
+/* ===== YOUR SETTINGS ===== */
+const BDAY_NAME = "Priyanga";   // in the birthday line
+const ASK_NAME  = "Madam";      // in the question: "Madam, will you be my forever?" (or put "Priyanga")
+// photo file in /assets + funny caption
+const PHOTOS = [
+ ["cat1.jpeg","cuddle level: max 🐱"],
+ ["surya1.jpeg","her hero 🔥"],
+ ["oggy1.jpeg","Oggy gang 🪳"],
+ ["lab1.jpeg","pink + blue = ❤️"],
+ ["cat2.jpeg","boss of the house"],
+ ["surya2.jpeg","mass mode ON"],
+ ["oggy2.jpeg","Oggy knows how 🌹"],
+ ["lab2.jpeg","L-O-V-E periodic style"],
+ ["cat3.jpeg","this cat said it first"],
+ ["ronaldo1.jpeg","SIUUU 🐐"],
+ ["chicken.jpeg","a heart made of chicken 🍗"]
+];
+// after YES: tries these in order, first one that exists plays. Put your cat video/gif in assets.
+const YES_MEDIA = ["assets/yes.mp4","assets/yes.gif","assets/cat3.jpeg"];
+/* ========================= */
+
+const $ = id => document.getElementById(id);
+$('bn').textContent = BDAY_NAME; $('qn').textContent = ASK_NAME;
+const reduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* floating polaroids */
+const sky = $('sky'), small = innerWidth < 600;
+const list = small ? PHOTOS.filter((_, i) => i % 3 !== 2) : PHOTOS;   // fewer photos on phones
+const n = list.length;
+list.forEach(([f, cap], i) => {
+  const p = document.createElement('div');
+  p.className = 'pl';
+  p.dataset.d = 12 + Math.random() * 28;
+  const w = small ? 62 + Math.random() * 16 : 120 + Math.random() * 40;   // phone: 62-78px
+  const lane = (innerWidth - w - 8) / n;                                   // each photo gets its own lane, no cut-off
+  const s = p.style;
+  s.setProperty('--x', (4 + i * lane + Math.random() * lane * .4) + 'px');
+  s.setProperty('--st', (Math.random() * 70) + 'vh');
+  p.innerHTML = '<div class="in"><img alt="" src="assets/' + f + '"><b>' + cap + '</b></div>';
+  const inn = p.firstChild.style;
+  inn.setProperty('--w', w + 'px');
+  inn.setProperty('--d', (22 + Math.random() * 14) + 's');
+  inn.setProperty('--dl', (-Math.random() * 30) + 's');
+  inn.setProperty('--dx', ((Math.random() - .5) * 60) + 'px');
+  inn.setProperty('--r0', ((Math.random() - .5) * 20) + 'deg');
+  inn.setProperty('--r1', ((Math.random() - .5) * 20) + 'deg');
+  p.querySelector('img').onerror = () => p.remove();
+  sky.appendChild(p);
+});
+if (!reduced && matchMedia('(pointer:fine)').matches) addEventListener('pointermove', e => {
+  const mx = e.clientX / innerWidth - .5, my = e.clientY / innerHeight - .5;
+  sky.querySelectorAll('.pl').forEach(p => {
+    const d = +p.dataset.d;
+    p.style.transform = 'translate(' + (mx * d) + 'px,' + (my * d) + 'px)';
+  });
+});
+
+/* runaway No */
+const hints = ["Oops, the No button ran away 😜","Nice try 🐱","It's scared of you 😂","Surya says: choose Yes! 🔥","Even Oggy would click Yes by now 🪳","The chemistry says Yes 🔬","No is not available today 🎂","Just click Yes da 🥺"];
+const yes = $('yes'), no = $('no'), hint = $('hint');
+yes.style.transition = 'none';          // so we can measure Yes in its final size
+let tries = 0, scale = 1, last = 0;
+
+const hits = (x, y, w, h, r, m) =>
+  x < r.right + m && x + w > r.left - m && y < r.bottom + m && y + h > r.top - m;
+
+function dodge(ev) {
+  if (ev && ev.cancelable) ev.preventDefault();
+  const now = Date.now();
+  if (now - last < 150) return;
+  last = now;
+
+  // 1) take No out of the row first, so Yes settles in its final place
+  if (no.style.position !== 'fixed') {
+    const r0 = no.getBoundingClientRect();
+    no.style.position = 'fixed';
+    no.style.left = r0.left + 'px';
+    no.style.top = r0.top + 'px';
+  }
+
+  // 2) grow Yes
+  scale = Math.min(scale + 0.1, innerWidth < 480 ? 1.5 : 2.2);
+  yes.style.transform = 'scale(' + scale + ')';
+
+  // 3) measure Yes in its final size/place, then pick a free spot
+  const yr = yes.getBoundingClientRect();
+  const bw = no.offsetWidth, bh = no.offsetHeight, pad = 10, gap = 24;
+  const maxX = innerWidth - bw - pad, maxY = innerHeight - bh - pad;
+  const px = ev && ev.clientX !== undefined ? ev.clientX : -999;
+  const py = ev && ev.clientY !== undefined ? ev.clientY : -999;
+  const far = Math.min(230, innerWidth * .4);
+
+  let x, y, ok = false;
+  for (let k = 0; k < 100 && !ok; k++) {
+    x = pad + Math.random() * (maxX - pad);
+    y = pad + Math.random() * (maxY - pad);
+    ok = Math.hypot(x + bw / 2 - px, y + bh / 2 - py) >= far && !hits(x, y, bw, bh, yr, gap);
+  }
+  if (!ok) {   // fallback: a corner that is not under Yes
+    const corners = [[pad, pad], [maxX, pad], [pad, maxY], [maxX, maxY]];
+    const free = corners.find(([cx, cy]) => !hits(cx, cy, bw, bh, yr, gap)) || corners[0];
+    x = free[0]; y = free[1];
+  }
+
+  no.style.left = x + 'px';
+  no.style.top = y + 'px';
+  hint.textContent = hints[tries % hints.length]; tries++;
+}
+
+// runs away when the cursor / finger gets CLOSE to it
+addEventListener('pointermove', e => {
+  if (no.style.display === 'none') return;
+  const r = no.getBoundingClientRect();
+  const dx = Math.max(r.left - e.clientX, 0, e.clientX - r.right);
+  const dy = Math.max(r.top - e.clientY, 0, e.clientY - r.bottom);
+  if (Math.hypot(dx, dy) < 85) dodge(e);
+});
+['pointerenter','pointerdown','touchstart','mousedown','click','focus'].forEach(t => no.addEventListener(t, dodge, {passive:false}));
+
+/* confetti */
+const c = $('c'), x = c.getContext('2d'); let ps = [];
+function size() { c.width = innerWidth; c.height = innerHeight; } size(); addEventListener('resize', size);
+function boom() {
+  if (reduced) return;
+  const em = ['💖','🐱','🎀','🎂','🔥','✨','🧪'];
+  ps = Array.from({length: 80}, () => ({x: innerWidth / 2, y: innerHeight * .55, vx: (Math.random() - .5) * 16, vy: -Math.random() * 15 - 4, e: em[Math.random() * em.length | 0], l: 140}));
+  tick();
+}
+function tick() {
+  x.clearRect(0, 0, c.width, c.height); x.font = '26px serif';
+  ps.forEach(p => { p.x += p.vx; p.y += p.vy; p.vy += .35; p.l--; x.globalAlpha = Math.max(p.l / 40, 0); x.fillText(p.e, p.x, p.y); });
+  ps = ps.filter(p => p.l > 0);
+  if (ps.length) requestAnimationFrame(tick); else x.clearRect(0, 0, c.width, c.height);
+}
+
+/* YES */
+function showMedia(list, box) {
+  if (!list.length) return;
+  const src = list[0], rest = list.slice(1);
+  let el;
+  if (/\.(mp4|webm|mov)$/i.test(src)) {
+    el = document.createElement('video');
+    el.loop = true; el.playsInline = true; el.controls = true; el.src = src;
+    el.onerror = () => { el.remove(); showMedia(rest, box); };
+    box.appendChild(el);
+    el.play().catch(() => { el.muted = true; el.play().catch(() => {}); });
+  } else {
+    el = document.createElement('img'); el.alt = ''; el.src = src;
+    el.onerror = () => { el.remove(); showMedia(rest, box); };
+    box.appendChild(el);
+  }
+  el.id = 'media';
+}
+yes.addEventListener('click', () => {
+  $('ask').style.display = 'none';
+  no.style.display = 'none';
+  $('win').style.display = 'block';
+  showMedia(YES_MEDIA, $('mediaBox'));
+  scrollTo(0, 0); document.body.scrollTop = 0;
+  boom();
+});
+</script>
+</body>
+</html>
